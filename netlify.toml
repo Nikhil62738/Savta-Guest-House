@@ -1,0 +1,41 @@
+# Netlify configuration for the Sawta Guest House frontend.
+# Connect this repo to Netlify; these settings build the React app in /frontend.
+
+[build]
+  base = "frontend"
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+# Serve real files under /downloads (e.g. the Android APK) directly, so the
+# SPA fallback below never rewrites them into index.html.
+[[redirects]]
+  from = "/downloads/*"
+  to = "/downloads/:splat"
+  status = 200
+
+# SPA fallback so /admin and other client routes don't 404 on refresh.
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
+
+# Never long-cache the service worker (so updates ship immediately).
+[[headers]]
+  for = "/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+[[headers]]
+  for = "/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
+# Serve the Android app with the correct type and force a download.
+[[headers]]
+  for = "/downloads/*.apk"
+  [headers.values]
+    Content-Type = "application/vnd.android.package-archive"
+    Content-Disposition = "attachment"

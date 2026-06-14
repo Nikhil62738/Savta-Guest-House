@@ -1,0 +1,66 @@
+# Render Blueprint for the Sawta Guest House backend (Express + MongoDB).
+# In Render: New + -> Blueprint -> connect this repo. Render reads this file.
+# Secrets marked "sync: false" must be filled in the Render dashboard after the first deploy.
+
+services:
+  - type: web
+    name: sawta-guest-house-api
+    runtime: node
+    rootDir: backend
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      # Comma-separated list of allowed frontend origins (your Netlify URL).
+      # e.g. https://sawta-guest-house.netlify.app
+      - key: CLIENT_URL
+        sync: false
+      # MongoDB Atlas connection string
+      - key: MONGODB_URI
+        sync: false
+      # JWT — Render generates a strong secret automatically
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES_IN
+        value: 7d
+      # Default admin (used by `npm run seed`)
+      - key: ADMIN_NAME
+        value: Sawta Admin
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
+      # Cloudinary (image & video uploads)
+      - key: CLOUDINARY_CLOUD_NAME
+        sync: false
+      - key: CLOUDINARY_API_KEY
+        sync: false
+      - key: CLOUDINARY_API_SECRET
+        sync: false
+      # Guest confirmation email — Gmail API (preferred)
+      - key: GMAIL_CLIENT_ID
+        sync: false
+      - key: GMAIL_CLIENT_SECRET
+        sync: false
+      - key: GMAIL_REFRESH_TOKEN
+        sync: false
+      - key: GMAIL_REDIRECT_URI
+        value: https://developers.google.com/oauthplayground
+      - key: GMAIL_SENDER
+        sync: false
+      # Business identity used in messages
+      - key: BUSINESS_NAME
+        value: Sawta Guest House
+      - key: BUSINESS_PHONE
+        sync: false
+      # Guest confirmation WhatsApp — Twilio (optional)
+      - key: TWILIO_ACCOUNT_SID
+        sync: false
+      - key: TWILIO_AUTH_TOKEN
+        sync: false
+      - key: TWILIO_WHATSAPP_FROM
+        value: whatsapp:+14155238886

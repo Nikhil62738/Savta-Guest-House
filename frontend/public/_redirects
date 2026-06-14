@@ -1,0 +1,7 @@
+# Serve real files under /downloads (e.g. the Android APK) directly so the
+# SPA fallback below never rewrites them to index.html.
+/downloads/*  /downloads/:splat  200
+
+# SPA fallback — serve index.html for every route so React Router handles
+# deep links like /admin, /admin/bookings, /rooms on refresh / direct load.
+/*    /index.html   200

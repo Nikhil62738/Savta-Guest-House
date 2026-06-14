@@ -1,0 +1,51 @@
+{
+  "expo": {
+    "name": "Sawta Guest House",
+    "slug": "sawta-guest-house-app",
+    "version": "1.0.0",
+    "icon": "./assets/icon.png",
+    "orientation": "portrait",
+    "scheme": "sawta",
+    "userInterfaceStyle": "automatic",
+    "newArchEnabled": false,
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F172A"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.sawta.guesthouse"
+    },
+    "android": {
+      "package": "com.sawta.guesthouse",
+      "versionCode": 1,
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#FAF9F6"
+      }
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-notifications",
+        {
+          "color": "#D4AF37"
+        }
+      ]
+    ],
+    "extra": {
+      "apiUrl": "https://savta-guest-house.onrender.com/api",
+      "whatsapp": "919876543210",
+      "phone": "+919876543210",
+      "email": "info@sawtaguesthouse.com",
+      "mapsQuery": "Sawta Guest House, Maharashtra, India"
+    }
+  }
+}
